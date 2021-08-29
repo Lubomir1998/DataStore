@@ -13,8 +13,8 @@ class MyViewModel @Inject constructor(
     private val datastoreUtil: DatastoreUtil
 ) : ViewModel() {
 
-    var name = mutableStateOf("Dave")
-    var age = mutableStateOf("1")
+    var name = mutableStateOf("")
+    var age = mutableStateOf("")
 
     fun getName() = viewModelScope.launch {
         datastoreUtil.name.collect {

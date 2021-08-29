@@ -2,6 +2,7 @@ package com.example.datastore
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -48,6 +49,11 @@ class MainActivity : ComponentActivity() {
                     viewModel.age
                 }
 
+                // since we don't have control over recompositions
+                // we put such calls in launched effect
+                // if the calls are made in a callback (such as button click), there's no problem
+                // it executes code only when the key changes
+                // if the key is a constant, it's executed once
                 LaunchedEffect(true) {
                     viewModel.getName()
                     viewModel.getAge()
@@ -80,6 +86,7 @@ class MainActivity : ComponentActivity() {
                                     getAge()
                                 }
                             }
+                            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
                         },
                         modifier = Modifier.clip(RoundedCornerShape(10.dp))
                     ) {
